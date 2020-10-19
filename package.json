@@ -38,7 +38,10 @@
     "bundle:min": "cross-env MINIFY=true webpack --progress --config build/webpack.build.config.js",
     "bundle:full": "cross-env MINIFY=false webpack --progress --config build/webpack.build.config.js",
     "bundle": "npm run bundle:min && npm run bundle:full",
-    "test": "jest"
+    "test": "jest",
+    "release": "standard-version",
+    "release:patch": "standard-version --release-as patch",
+    "release:minor": "standard-version --release-as minor"
   },
   "dependencies": {
     "axios": "^0.15.3"
@@ -91,6 +94,7 @@
     "rimraf": "^2.6.2",
     "semver": "^5.5.0",
     "shelljs": "^0.7.6",
+    "standard-version": "^9.0.0",
     "stats-webpack-plugin": "0.4.3",
     "url-loader": "^0.5.8",
     "vue": "2.5.16",
