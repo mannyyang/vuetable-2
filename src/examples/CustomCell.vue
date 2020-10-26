@@ -15,7 +15,7 @@ export default {
      */
     isHeader: {
       type: Boolean,
-      default: false,
+      default: false
     },
     /**
      * The title option from field definition object is passed via title prop.
@@ -24,15 +24,15 @@ export default {
      */
     title: {
       type: String,
-      default: "",
+      default: ""
     },
     rowData: {
       type: Object,
-      default: () => null,
+      default: () => null
     },
     rowIndex: {
       type: Number,
-      default: -1,
+      default: -1
     },
     /**
      * The field definition object of this field. Remember that you can use
@@ -40,15 +40,15 @@ export default {
      */
     rowField: {
       type: Object,
-      default: () => null,
-    },
+      default: () => null
+    }
   },
 
   methods: {
     onClick(event) {
       this.$emit("click", event);
-    },
-  },
+    }
+  }
 };
 </script>
 

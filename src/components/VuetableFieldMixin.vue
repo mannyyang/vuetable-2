@@ -17,12 +17,12 @@ export default {
     },
     title: {
       type: String,
-      default: ''
+      default: ""
     },
     vuetable: {
       type: Object,
       default: null
     }
   }
-}
+};
 </script>
