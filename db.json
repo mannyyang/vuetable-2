@@ -1,0 +1,50 @@
+{
+  "creatives": [
+    {
+      "id": 1,
+      "name": "Native Article Very Long Creative Name 123456789",
+      "budget_spent": "$1,000",
+      "impressions": 500,
+      "ctr": "1.5%",
+      "clicks": 150,
+      "views": 300,
+      "billable": 100,
+      "cta_rate": "2.7%",
+      "cta_clicks": 45,
+      "avg_time": "01:15",
+      "completion_rate": "87.4%",
+      "conversions": 10,
+      "value": "$2.00",
+      "last_updated": "10/07/20"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "Post 1"
+    },
+    {
+      "id": 2,
+      "title": "Post 2"
+    },
+    {
+      "id": 3,
+      "title": "Post 3"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    },
+    {
+      "id": 2,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "mannyyang"
+  }
+}
