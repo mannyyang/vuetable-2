@@ -46,5 +46,13 @@
   ],
   "profile": {
     "name": "mannyyang"
-  }
+  },
+  "users": [
+    {
+      "id": 1,
+      "name": "Dalvin Cook",
+      "birthday": "02/02/1990",
+      "gender": "male"
+    }
+  ]
 }
