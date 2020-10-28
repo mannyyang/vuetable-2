@@ -1,9 +1,3 @@
-<template>
-  <button class="button is-primary" @click="onClick">
-    <slot></slot>
-  </button>
-</template>
-
 <script lang="ts">
 export default {
   name: "my-button",
@@ -15,6 +9,12 @@ export default {
   }
 };
 </script>
+
+<template>
+  <button class="button is-primary" @click="onClick">
+    <slot></slot>
+  </button>
+</template>
 
 <style scoped>
 button {

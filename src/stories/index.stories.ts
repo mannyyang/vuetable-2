@@ -1,5 +1,5 @@
 import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
+// import { linkTo } from "@storybook/addon-links";
 
 import MyButton from "../components/MyButton.vue";
 
@@ -14,15 +14,15 @@ export const withText = () => ({
   methods: { action: action("clicked") }
 });
 
-export const withJSX = () => ({
-  render() {
-    return (
-      <MyButton onClick={linkTo("Button", "With Some Emoji")}>
-        With JSX
-      </MyButton>
-    );
-  }
-});
+// export const withJSX = () => ({
+//   render() {
+//     return (
+//       <MyButton onClick={linkTo("Button", "With Some Emoji")}>
+//         With JSX
+//       </MyButton>
+//     );
+//   }
+// });
 
 export const withSomeEmoji = () => ({
   components: { MyButton },
