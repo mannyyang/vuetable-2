@@ -136,20 +136,6 @@
       ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor"
     }
   },
-  "_id": "vuetable-3@3.0.5",
-  "browserify": {
-    "transform": [
-      "babelify",
-      [
-        "vueify",
-        {
-          "_flags": {
-            "debug": true
-          }
-        }
-      ]
-    ]
-  },
   "bugs": {
     "url": "https://github.com/mannyyang/vuetable-3/issues"
   },
@@ -176,7 +162,7 @@
       "git add"
     ]
   },
-  "readme": "ERROR: No README data found!",
+  "readme": "https://github.com/mannyyang/vuetable-3#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mannyyang/vuetable-3.git"
