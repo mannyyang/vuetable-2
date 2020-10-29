@@ -2,6 +2,8 @@
 
 ### Documentation and Tutorial
 
+WIP: [Storybook Pages](https://github.com/mannyynag/vuetable-3/storybook)
+
 Meanwhile, check out
 - the [Tutorial](https://github.com/ratiw/vuetable-2-tutorial/wiki)
 with follow-along project [here](https://github.com/ratiw/vuetable-2-tutorial). It should be enough to get you started.

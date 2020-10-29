@@ -226,8 +226,8 @@
 
 ### # sort-order
 - works in `api-mode` only
-- type: _Array_
-- default: `[]` _(empty array)_
+- type: _Object_
+- default: `null`
 - description
 
   The default sort order that Vuetable should use when requesting the data from server.
