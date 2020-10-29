@@ -1,0 +1,144 @@
+import { Meta, ArgsTable, Story, Preview } from "@storybook/addon-docs/blocks";
+import { action } from "@storybook/addon-actions";
+import { linkTo } from "@storybook/addon-links";
+import Vuetable from "../components/Vuetable.vue";
+import CustomCell from "../components/cells/CustomCell.vue";
+
+<Meta title="custom-cells" component={Vuetable} />
+
+# Custom Cells
+
+Vue components can be used as the cell template by importing one and replacing
+the name value with it. Below is an example of how a component needs to be set
+up to be useable with vuetable-3.
+
+```vue
+<script lang="ts">
+import { Component, Prop } from "vue-property-decorator";
+import { mixins } from "vue-class-component";
+import VuetableFieldMixin from "../../components/VuetableFieldMixin.vue";
+
+@Component({
+  name: "CustomCell",
+  components: {},
+  mixins: [VuetableFieldMixin]
+})
+export default class CustomCell extends mixins() {
+  /**
+   * Indicate whether Field Component should render the "header" or "data"
+   * template section.
+   */
+  @Prop({ default: false })
+  isHeader!: boolean;
+
+  /**
+   * The title option from field definition object is passed via title prop.
+   * You can simply use title prop to render column title if there is no
+   * special need other than display the column title.
+   */
+  @Prop({ default: "" })
+  title!: string;
+
+  @Prop({ default: () => null })
+  rowData!: string;
+
+  @Prop({ default: -1 })
+  rowIndex!: number;
+
+  /**
+   * The field definition object of this field. Remember that you can use
+   * field definition object to hold additional data, parameters, or results.
+   */
+  @Prop({ default: () => null })
+  rowField!: object;
+
+  /**
+   * The click event needs to be bound on the header to have it bubble up for
+   * sorting purposes.
+   */
+  onHeaderClick(event: unknown) {
+    this.$emit("click", event);
+  }
+}
+</script>
+
+<template>
+  <th v-if="isHeader" scope="col" @click="onHeaderClick">{{ title }}</th>
+  <td v-else>{{ rowData.name }}</td>
+</template>
+```
+
+<Preview>
+  <Story name="CellComponent">
+    {{
+      components: { Vuetable },
+      props: {
+        fields: {
+          default: () => [
+            {
+              name: CustomCell,
+              title: "Name"
+            },
+            {
+              name: "email",
+              title: "Email Address"
+            },
+            {
+              name: "phone",
+              titleClass: "center aligned",
+              dataClass: "center aligned"
+            }
+          ]
+        }
+      },
+      template: `
+      <vuetable
+        api-url="http://my-json-server.typicode.com/mannyyang/vuetable-3/users"
+        pagination-path=""
+        data-path=""
+        :fields="fields"
+      >
+      </vuetable>
+      `
+    }}
+  </Story>
+</Preview>
+
+## Using a cutom cell with sort
+
+<Preview>
+  <Story name="CellComponentWithSort">
+    {{
+      components: { Vuetable },
+      props: {
+        fields: {
+          default: () => [
+            {
+              name: CustomCell,
+              title: "Name",
+              sortField: "name"
+            },
+            {
+              name: "email",
+              title: "Email Address"
+            },
+            {
+              name: "phone",
+              titleClass: "center aligned",
+              dataClass: "center aligned"
+            }
+          ]
+        }
+      },
+      template: `
+      <vuetable
+        api-url="http://my-json-server.typicode.com/mannyyang/vuetable-3/users"
+        pagination-path=""
+        data-path=""
+        :fields="fields"
+      >
+      </vuetable>
+      `
+    }}
+  </Story>
+</Preview>

@@ -210,6 +210,7 @@ export default {
       default() {
         return {
           sort: "sort",
+          order: "order",
           page: "page",
           perPage: "per_page"
         };
@@ -255,6 +256,9 @@ export default {
         return [];
       }
     },
+    /**
+     * @deprecated
+     */
     multiSort: {
       type: Boolean,
       default: false
@@ -267,6 +271,7 @@ export default {
      * physical key that will trigger multi-sort option
      * possible values: 'alt', 'ctrl', 'meta', 'shift'
      * 'ctrl' might not work as expected on Mac
+     * @deprecated
      */
     multiSortKey: {
       type: String,
@@ -458,7 +463,7 @@ export default {
   },
 
   watch: {
-    multiSort(newVal, oldVal) {
+    multiSort(newVal) {
       if (newVal === false && this.sortOrder.length > 1) {
         this.sortOrder.splice(1);
         this.loadData();
@@ -469,19 +474,19 @@ export default {
       if (this.reactiveApiUrl && newVal !== oldVal) this.refresh();
     },
 
-    data(newVal, oldVal) {
+    data(newVal) {
       this.setData(newVal);
     },
 
-    tableHeight(newVal, oldVal) {
+    tableHeight() {
       this.checkScrollbarVisibility();
     },
 
-    fields(newVal, oldVal) {
+    fields() {
       this.normalizeFields();
     },
 
-    perPage(newVal, oldVal) {
+    perPage() {
       this.reload();
     }
   },
@@ -681,9 +686,8 @@ export default {
 
       this.fireEvent("loading");
 
-      this.httpOptions["params"] = this.getAppendParams(
-        this.getAllQueryParams()
-      );
+      const queryParams = this.getAllQueryParams();
+      this.httpOptions["params"] = this.getAppendParams(queryParams);
 
       return this.fetch(this.apiUrl, this.httpOptions)
         .then(success, failed)
@@ -798,6 +802,7 @@ export default {
       }
 
       params[this.queryParams.sort] = this.getSortParam();
+      params[this.queryParams.order] = this.getOrderParam();
       params[this.queryParams.page] = this.currentPage;
       params[this.queryParams.perPage] = this.perPage;
 
@@ -817,9 +822,11 @@ export default {
     },
 
     getDefaultSortParam() {
-      return this.sortOrder
-        .map(item => `${item.sortField}|${item.direction}`)
-        .join(",");
+      return this.sortOrder.map(item => `${item.sortField}`).join(",");
+    },
+
+    getOrderParam() {
+      return this.sortOrder[0] ? this.sortOrder[0].direction : null;
     },
 
     getAppendParams(params) {
@@ -874,7 +881,7 @@ export default {
       }
     },
 
-    addSortColumn(field, direction) {
+    addSortColumn(field) {
       this.sortOrder.push({
         field: field.name,
         sortField: field.sortField,
@@ -1056,7 +1063,6 @@ export default {
     },
 
     makePagination(total = null, perPage = null, currentPage = null) {
-      const pagination = {};
       total = total === null ? 0 : total;
       perPage = perPage === null ? this.perPage : perPage;
       currentPage = currentPage === null ? this.currentPage : currentPage;

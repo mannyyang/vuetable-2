@@ -53,6 +53,6 @@ export default {
 </script>
 
 <template>
-  <th v-if="isHeader" scope="col" @click="onClick">{{ title }}</th>
+  <th v-if="isHeader" scope="col" @click="onClick" v-html="title"></th>
   <td v-else>{{ rowData.name }}</td>
 </template>

@@ -164,7 +164,8 @@ export default {
         const iconTag = this.vuetable.showSortIcons
           ? this.renderIconTag(
               ["sort-icon", this.sortIcon(field)],
-              `style="${style}"`
+              `style="${style}"`,
+              field
             )
           : "";
         return title + " " + iconTag;
@@ -207,10 +208,10 @@ export default {
       return opacity;
     },
 
-    renderIconTag(classes, options = "") {
+    renderIconTag(classes, options = "", field) {
       return typeof this.css.renderIcon === "undefined"
         ? `<i class="${classes.join(" ")}" ${options}></i>`
-        : this.css.renderIcon(classes, options);
+        : this.css.renderIcon(classes, options, field);
     },
 
     onColumnHeaderClicked(field, event) {

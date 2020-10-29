@@ -35,9 +35,9 @@ export default {
   },
 
   methods: {
-    columnClass(field, fieldIndex) {
+    columnClass(field) {
       let fieldName =
-        typeof field.name === "object" && field.name !== null
+        field.name && typeof field.name === "function"
           ? field.name.name
           : field.name;
       fieldName = fieldName.replace(this.fieldPrefix, "");

@@ -291,6 +291,89 @@ const dataFields = [
   }
 ];
 
+const mainTemplate = `
+<div class="ui vertical segment">
+<div class="ui container">
+
+  <div id="app" class="ui vertical stripe segment">
+
+        <div id="content" class="ui basic segment">
+
+            <h3 class="ui header">List of Users</h3>
+
+            <div class="ui grid">
+                <div class="ui left aligned nine wide column">
+                    <div class="ui labeled icon input">
+                      <div class="ui label">Search:</div>
+                      <input v-model="searchFor" class="ui input" @keyup.enter="setFilter">
+                      <i class="search icon"></i>
+                    </div>
+                    <button class="ui button primary" @click="setFilter">Go</button>
+                    <button class="ui button" @click="resetFilter">Reset</button>
+                </div>
+                <div class="ui right aligned seven wide column">
+                  <button class="ui basic button" id="settingsBtn" @click="showSettingsModal">
+                    <i class="setting icon"></i>
+                    Settings
+                  </button>
+                </div>
+            </div><!-- ui grid -->
+
+            <div :class="[{'vuetable-wrapper ui basic segment': true}, loading]">
+
+              <vuetable ref="vuetable"
+                api-url="http://vuetable.ratiw.net/api/users"
+                :fields="fields"
+                :table-height="tableHeight"
+                :transform="transform"
+                pagination-path="pagination"
+                :sort-order="sortOrder"
+                :multi-sort="multiSort"
+                :per-page="perPage"
+                :append-params="moreParams"
+                detail-row-component="my-detail-row"
+                detail-row-transition="expand"
+                :row-class="rowClassCB"
+                @vuetable:pagination-data="onPaginationData"
+                @vuetable:load-success="onLoadSuccess"
+                @vuetable:loading="showLoader"
+                @vuetable:loaded="hideLoader"
+                @vuetable:cell-clicked="onCellClicked"
+                @vuetable:initialized="onInitialized"
+                @vuetable:data-reset="onDataReset"
+                @vuetable:field-event="onFieldEvent"
+                @vuetable:header-event="onHeaderEvent"
+              >
+                <div slot="slot-actions" slot-scope="props">
+                  <button class="ui red button" @click="onActionClicked('view-item', props.rowData)"><i class="zoom icon"></i></button>
+                  <button class="ui blue button" @click="onActionClicked('edit-item', props.rowData)"><i class="edit icon"></i></button>
+                  <button class="ui green button" @click="onActionClicked('delete-item', props.rowData)"><i class="delete icon"></i></button>
+                </div>
+              </vuetable>
+              <div class="vuetable-pagination ui bottom attached segment grid">
+                <vuetable-pagination-info ref="paginationInfo"
+                  :info-template="paginationInfoTemplate"
+                ></vuetable-pagination-info>
+                <component :is="paginationComponent" ref="pagination"
+                  @vuetable-pagination:change-page="onChangePage"
+                ></component>
+              </div>
+
+            </div><!-- vuetable-wrapper -->
+
+            <settings-modal ref="settingsModal"
+              :vuetable-fields="vuetableFields"
+              :field-prefix="fieldPrefix"
+            ></settings-modal>
+
+          </div><!-- content -->
+
+      </div><!-- app -->
+  </div><!-- ui container -->
+
+</div>
+`;
+
 /* eslint-disable no-new */
 const vm = new Vue({
   el: "#app",
@@ -300,6 +383,7 @@ const vm = new Vue({
     VuetablePaginationDropdown,
     VuetablePaginationInfo
   },
+  template: mainTemplate,
   data: {
     loading: "",
     searchFor: "",
