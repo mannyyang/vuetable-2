@@ -17,7 +17,7 @@
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
     "start": "node build/dev-server.js",
-    "storybook:build": "vue-cli-service storybook:build -c config/storybook",
+    "storybook:build": "vue-cli-service storybook:build -c config/storybook -o docs/storybook",
     "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook",
     "test": "jest"
   },
