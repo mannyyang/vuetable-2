@@ -3,6 +3,7 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 import Vuetable from "../components/Vuetable.vue";
 import CustomCell from "../components/cells/CustomCell.vue";
+import CSS from "./vuetable-css.js";
 
 <Meta title="custom-cells" component={Vuetable} />
 
@@ -111,6 +112,9 @@ export default class CustomCell extends mixins() {
     {{
       components: { Vuetable },
       props: {
+        css: {
+          default: () => CSS
+        },
         fields: {
           default: () => [
             {
@@ -133,6 +137,7 @@ export default class CustomCell extends mixins() {
       template: `
       <vuetable
         api-url="http://my-json-server.typicode.com/mannyyang/vuetable-3/users"
+        :css="css.table"
         pagination-path=""
         data-path=""
         :fields="fields"
@@ -142,3 +147,36 @@ export default class CustomCell extends mixins() {
     }}
   </Story>
 </Preview>
+
+In order to use Vue components as the sort icon, you'll need to update the css
+object that is passed to vuetable-3.
+
+```js
+// Imported as `CSS` found in code example above.
+
+import SortIcon from "./SortIcon";
+
+export default {
+  table: {
+    tableWrapper: "",
+    tableHeaderClass: "fixed",
+    tableBodyClass: "fixed",
+    ...,
+    // When using the `renderSortComp` to use a component for the sort icon, 
+    // the css strings needs to be cleared out or else it'll add the `<i>` as an
+    // html string.
+    renderIcon: () => "",
+    // Vue component will automatically pass the current order through `order`
+    // prop.
+    renderSortComp: SortIcon
+  },
+
+  pagination: {
+    ...
+  },
+
+  paginationInfo: {
+    ...
+  }
+};
+```

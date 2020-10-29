@@ -14,7 +14,13 @@
             :style="{ width: field.width }"
             @vuetable:header-event="vuetable.onHeaderEvent"
             @click="onColumnHeaderClicked(field, $event)"
-          ></component>
+          >
+            <component
+              :is="getSortComponent(field).component"
+              v-bind="getSortComponent(field).props"
+              v-if="getSortComponent(field)"
+            />
+          </component>
         </template>
         <template v-else-if="vuetable.isFieldSlot(field.name)">
           <th
@@ -120,6 +126,31 @@ export default {
       }
 
       return cls;
+    },
+
+    // Allow ability to render a vue component for the sort icon.
+    getSortComponent(field) {
+      const i = this.currentSortOrderPosition(field);
+      const sortCompFunc = this.css.renderSortComp;
+      if (!sortCompFunc) {
+        return;
+      }
+
+      if (i !== false) {
+        return {
+          component: sortCompFunc,
+          props: {
+            order: this.sortOrder[i].direction == "asc" ? "asc" : "desc"
+          }
+        };
+      }
+
+      return {
+        component: sortCompFunc,
+        props: {
+          order: "sortable"
+        }
+      };
     },
 
     isInCurrentSortGroup(field) {

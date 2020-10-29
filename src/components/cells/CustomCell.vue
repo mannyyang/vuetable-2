@@ -48,6 +48,9 @@ export default class CustomCell extends mixins() {
 </script>
 
 <template>
-  <th v-if="isHeader" scope="col" @click="onHeaderClick" v-html="title"></th>
+  <th v-if="isHeader" scope="col" @click="onHeaderClick">
+    {{ title }}
+    <slot />
+  </th>
   <td v-else>{{ rowData.name }}</td>
 </template>
