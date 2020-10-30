@@ -37,7 +37,8 @@ export default {
   methods: {
     columnClass(field) {
       let fieldName =
-        field.name && typeof field.name === "object"
+        field.name &&
+        (typeof field.name === "object" || typeof field.name === "function")
           ? field.name.name
           : field.name;
 
