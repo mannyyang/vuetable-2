@@ -45,7 +45,8 @@
     }
   ],
   "profile": {
-    "name": "mannyyang"
+    "name": "mannyyang",
+    "emptyTest": []
   },
   "users": [
     {
