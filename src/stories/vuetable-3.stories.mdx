@@ -28,7 +28,7 @@ Fields can be defined as simple array of string, array of object, or the mix.
       },
       template: `
       <vuetable
-        api-url="http://my-json-server.typicode.com/mannyyang/vuetable-3/users"
+        api-url="https://my-json-server.typicode.com/mannyyang/vuetable-3/users"
         pagination-path=""
         data-path=""
         :fields="fields"
@@ -66,11 +66,53 @@ Fields can be defined as simple array of string, array of object, or the mix.
       },
       template: `
       <vuetable
-        api-url="http://my-json-server.typicode.com/mannyyang/vuetable-3/users"
+        api-url="https://my-json-server.typicode.com/mannyyang/vuetable-3/users"
         pagination-path=""
         data-path=""
         :fields="fields"
       >
+      </vuetable>
+      `
+    }}
+  </Story>
+</Preview>
+
+## Empty Table
+
+<Preview>
+  <Story name="Empty Table">
+    {{
+      components: { Vuetable },
+      props: {
+        fields: {
+          default: () => [
+            {
+              name: "name"
+            },
+            {
+              name: "email",
+              title: "Email Address"
+            },
+            {
+              name: "phone",
+              sortField: "phone",
+              titleClass: "center aligned",
+              dataClass: "center aligned"
+            }
+          ]
+        }
+      },
+      template: `
+      <vuetable
+        api-url="https://my-json-server.typicode.com/mannyyang/vuetable-3/profile"
+        pagination-path=""
+        data-path="emptyTest"
+        :fields="fields"
+      >
+        <template v-slot:empty-result>
+          Use a named slot 'empty-result' to display information regarding an
+          empty table.
+        </template>
       </vuetable>
       `
     }}

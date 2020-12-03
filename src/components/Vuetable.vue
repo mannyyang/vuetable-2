@@ -123,11 +123,11 @@
           </template>
           <template v-if="displayEmptyDataRow">
             <tr>
-              <td
-                :colspan="countVisibleFields"
-                class="vuetable-empty-result"
-                v-html="noDataTemplate"
-              ></td>
+              <td :colspan="countVisibleFields" class="vuetable-empty-result">
+                <slot name="empty-result">
+                  {{ noDataTemplate }}
+                </slot>
+              </td>
             </tr>
           </template>
           <template v-if="lessThanMinRows">
