@@ -1,5 +1,4 @@
 {
-  "empty-array": [],
   "creatives": [
     {
       "id": 1,
@@ -46,7 +45,8 @@
     }
   ],
   "profile": {
-    "name": "mannyyang"
+    "name": "mannyyang",
+    "emptyTest": [],
   },
   "users": [
     {
