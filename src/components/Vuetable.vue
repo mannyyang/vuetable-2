@@ -43,7 +43,11 @@
           </slot>
         </thead>
         <tfoot>
-          <slot name="tableFooter" :fields="tableFields"></slot>
+          <slot
+            name="tableFooter"
+            :fields="tableFields"
+            :data="tableData"
+          ></slot>
         </tfoot>
         <tbody v-cloak class="vuetable-body">
           <template v-for="(item, itemIndex) in tableData">
@@ -690,8 +694,8 @@ export default {
       this.httpOptions["params"] = this.getAppendParams(queryParams);
 
       return this.fetch(this.apiUrl, this.httpOptions)
-        .then(success, failed)
-        .catch(() => failed());
+        .then(success)
+        .catch(e => failed(e));
     },
 
     fetch(apiUrl, httpOptions) {
