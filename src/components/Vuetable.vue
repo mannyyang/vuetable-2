@@ -445,6 +445,9 @@ export default {
   },
 
   mounted() {
+    // To account for setting it dynamcially (ex. url params)
+    this.currentPage = this.initialPage;
+
     if (this.loadOnStart) {
       this.loadData();
     }
@@ -682,7 +685,14 @@ export default {
         .join("");
     },
 
-    loadData(success = this.loadSuccess, failed = this.loadFailed) {
+    loadData(
+      success = this.loadSuccess,
+      failed = this.loadFailed,
+      initialParams = {}
+    ) {
+      const successCb = success || this.loadSuccess;
+      const failedCb = failed || this.loadFailed;
+
       if (this.isDataMode) {
         this.handleDataMode();
         return;
@@ -691,11 +701,16 @@ export default {
       this.fireEvent("loading");
 
       const queryParams = this.getAllQueryParams();
-      this.httpOptions["params"] = this.getAppendParams(queryParams);
+      const allParams = {
+        ...this.getAppendParams(queryParams),
+        ...initialParams
+      };
+
+      this.httpOptions["params"] = allParams;
 
       return this.fetch(this.apiUrl, this.httpOptions)
-        .then(success)
-        .catch(e => failed(e));
+        .then(successCb)
+        .catch(e => failedCb(e));
     },
 
     fetch(apiUrl, httpOptions) {

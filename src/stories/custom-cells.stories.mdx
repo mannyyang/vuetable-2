@@ -15,52 +15,52 @@ up to be useable with vuetable-3.
 
 ```html
 <script lang="ts">
-import { Component, Prop } from "vue-property-decorator";
-import { mixins } from "vue-class-component";
-import VuetableFieldMixin from "../../components/VuetableFieldMixin.vue";
+  import { Component, Prop } from "vue-property-decorator";
+  import { mixins } from "vue-class-component";
+  import VuetableFieldMixin from "../../components/VuetableFieldMixin.vue";
 
-@Component({
-  name: "CustomCell",
-  components: {},
-  mixins: [VuetableFieldMixin]
-})
-export default class CustomCell extends mixins() {
-  /**
-   * Indicate whether Field Component should render the "header" or "data"
-   * template section.
-   */
-  @Prop({ default: false })
-  isHeader!: boolean;
+  @Component({
+    name: "CustomCell",
+    components: {},
+    mixins: [VuetableFieldMixin]
+  })
+  export default class CustomCell extends mixins() {
+    /**
+     * Indicate whether Field Component should render the "header" or "data"
+     * template section.
+     */
+    @Prop({ default: false })
+    isHeader!: boolean;
 
-  /**
-   * The title option from field definition object is passed via title prop.
-   * You can simply use title prop to render column title if there is no
-   * special need other than display the column title.
-   */
-  @Prop({ default: "" })
-  title!: string;
+    /**
+     * The title option from field definition object is passed via title prop.
+     * You can simply use title prop to render column title if there is no
+     * special need other than display the column title.
+     */
+    @Prop({ default: "" })
+    title!: string;
 
-  @Prop({ default: () => null })
-  rowData!: string;
+    @Prop({ default: () => null })
+    rowData!: string;
 
-  @Prop({ default: -1 })
-  rowIndex!: number;
+    @Prop({ default: -1 })
+    rowIndex!: number;
 
-  /**
-   * The field definition object of this field. Remember that you can use
-   * field definition object to hold additional data, parameters, or results.
-   */
-  @Prop({ default: () => null })
-  rowField!: object;
+    /**
+     * The field definition object of this field. Remember that you can use
+     * field definition object to hold additional data, parameters, or results.
+     */
+    @Prop({ default: () => null })
+    rowField!: object;
 
-  /**
-   * The click event needs to be bound on the header to have it bubble up for
-   * sorting purposes.
-   */
-  onHeaderClick(event: unknown) {
-    this.$emit("click", event);
+    /**
+     * The click event needs to be bound on the header to have it bubble up for
+     * sorting purposes.
+     */
+    onHeaderClick(event: unknown) {
+      this.$emit("click", event);
+    }
   }
-}
 </script>
 
 <template>
@@ -138,6 +138,12 @@ export default class CustomCell extends mixins() {
       <vuetable
         api-url="https://my-json-server.typicode.com/mannyyang/vuetable-3/users"
         :css="css.table"
+        :query-params="{
+          page: '_page',
+          sort: '_sort',
+          perPage: '_limit',
+          order: '_order'
+        }"
         pagination-path=""
         data-path=""
         :fields="fields"
@@ -162,7 +168,7 @@ export default {
     tableHeaderClass: "fixed",
     tableBodyClass: "fixed",
     ...,
-    // When using the `renderSortComp` to use a component for the sort icon, 
+    // When using the `renderSortComp` to use a component for the sort icon,
     // the css strings needs to be cleared out or else it'll add the `<i>` as an
     // html string.
     renderIcon: () => "",

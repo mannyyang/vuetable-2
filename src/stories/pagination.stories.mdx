@@ -1,0 +1,28 @@
+import { Meta, Props, Story, Preview } from "@storybook/addon-docs/blocks";
+import { action } from "@storybook/addon-actions";
+import { linkTo } from "@storybook/addon-links";
+import StoryRouter from 'storybook-vue-router';
+import Vuetable from "../components/Vuetable.vue";
+import Pagination from "./Pagination.vue";
+
+<Meta title="pagination" component={Vuetable} />
+
+# Pagination
+
+Use the internal methods to handle pagination. Make sure your query parameters
+are aligned with the table.
+
+When setting references for the properties `initialPage` or `sortOrder`, make
+sure that you do it in the `created()` hook or before as the initial load of
+data is done on the `mounted()` hook.
+
+<Preview decorators={[StoryRouter()]}>
+  <Story name="pagination component" decorators={[StoryRouter()]}>
+    {{
+      components: {
+        Pagination
+      },
+      template: `<pagination />`
+    }}
+  </Story>
+</Preview>

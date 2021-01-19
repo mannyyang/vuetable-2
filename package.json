@@ -25,9 +25,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11",
-    "vue-class-component": "^7.2.3",
-    "vue-property-decorator": "^8.4.2"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@storybook/addon-actions": "6",
@@ -98,6 +96,7 @@
     "shelljs": "^0.7.6",
     "standard-version": "^9.0.0",
     "stats-webpack-plugin": "0.4.3",
+    "storybook-vue-router": "^1.0.7",
     "typescript": "~3.9.3",
     "url-loader": "^0.5.8",
     "vue": "2.5.16",
@@ -113,7 +112,10 @@
     "webpack-cli": "^4.1.0",
     "webpack-dev-middleware": "^1.12.2",
     "webpack-hot-middleware": "2.22.2",
-    "webpack-merge": "4.1.2"
+    "webpack-merge": "4.1.2",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^8.4.2",
+    "vue-router": "^3.4.9"
   },
   "browserslist": [
     "> 1%",
