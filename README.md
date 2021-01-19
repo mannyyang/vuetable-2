@@ -20,5 +20,12 @@ npm install vuetable-3 --save
 # Contributions
 Any contribution to the code must be done to the `next` branch.
 
+Two builds are needed before publishing:
+
+1. Library dist build: `npm run bundle`
+2. Storybook prod build: `npm run storybook:build`
+
+Then, use standard-version to commit a new version.
+
 # License
 Vuetable is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
