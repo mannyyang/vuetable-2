@@ -5,12 +5,12 @@ import { mixins } from "vue-class-component";
 import Vuetable from "../components/Vuetable.vue";
 
 @Component({
-  name: "TablePagination",
+  name: "TableSort",
   components: {
     Vuetable
   }
 })
-export default class TablePagination extends mixins() {
+export default class TableSort extends mixins() {
   @Prop({
     default: () => [
       {
@@ -33,17 +33,12 @@ export default class TablePagination extends mixins() {
   fields!: string[];
 
   currPage = 1;
-  sortOrder = [{}];
-
-  created() {
-    this.currPage = 2;
-    this.sortOrder = [
-      {
-        sortField: "email",
-        direction: "asc"
-      }
-    ];
-  }
+  sortOrder = [
+    {
+      sortField: "email",
+      direction: "asc"
+    }
+  ];
 
   transform(data: unknown) {
     const temp = {

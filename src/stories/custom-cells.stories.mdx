@@ -201,3 +201,63 @@ is going to be.
   <td v-else>Row cell data</td>
 </template>
 ```
+
+## Using an Initial Sort Order
+
+You set the initial sort and order through the sort order property. Although it
+takes an array as a property, we currently only support sorting by one column.
+
+<Preview>
+  <Story name="CellComponentWithInitialSort">
+    {{
+      components: { Vuetable },
+      props: {
+        css: {
+          default: () => CSS
+        },
+        fields: {
+          default: () => [
+            {
+              name: CustomCell,
+              title: "Name",
+              sortField: "name"
+            },
+            {
+              name: "email",
+              title: "Email Address",
+              sortField: "email"
+            },
+            {
+              name: "phone",
+              titleClass: "center aligned",
+              dataClass: "center aligned"
+            }
+          ]
+        }
+      },
+      template: `
+      <vuetable
+        api-url="https://my-json-server.typicode.com/mannyyang/vuetable-3/users"
+        :css="css.table"
+        :query-params="{
+          page: '_page',
+          sort: '_sort',
+          perPage: '_limit',
+          order: '_order'
+        }"
+        :sort-order="[
+          {
+            sortField: 'email',
+            direction: 'desc'
+          }
+        ]"
+        pagination-path=""
+        data-path=""
+        :fields="fields"
+      >
+      </vuetable>
+      `
+    }}
+  </Story>
+</Preview>
+

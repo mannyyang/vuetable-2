@@ -1,0 +1,25 @@
+import { Meta, Props, Story, Preview } from "@storybook/addon-docs/blocks";
+import { action } from "@storybook/addon-actions";
+import { linkTo } from "@storybook/addon-links";
+import StoryRouter from 'storybook-vue-router';
+import Vuetable from "../components/Vuetable.vue";
+import Sort from "./Sort.vue";
+
+<Meta title="sort" component={Vuetable} />
+
+# Sorting
+
+When setting references for the properties `initialPage` or `sortOrder`, make
+sure that you do it in the `created()` hook or before as the initial load of
+data is done on the `mounted()` hook.
+
+<Preview decorators={[StoryRouter()]}>
+  <Story name="sort component" decorators={[StoryRouter()]}>
+    {{
+      components: {
+        Sort
+      },
+      template: `<sort />`
+    }}
+  </Story>
+</Preview>

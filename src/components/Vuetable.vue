@@ -876,7 +876,7 @@ export default {
 
     fieldIsInSortOrderPosition(field, i) {
       return (
-        this.sortOrder[i].field === field.name &&
+        // this.sortOrder[i].field === field.name &&
         this.sortOrder[i].sortField === field.sortField
       );
     },
