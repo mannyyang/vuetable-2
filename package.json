@@ -23,7 +23,7 @@
   },
   "main": "dist/vuetable-3.common.js",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
